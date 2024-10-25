@@ -1,0 +1,35 @@
+{
+    "name": "agenciafmd/admix-redirects",
+    "description": "Redirects - Agência F&MD",
+    "homepage": "https://github.com/agenciafmd/admix-redirects",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "João Paulo dos Santos Ferreira",
+            "email": "joao.paulo@fmd.ag",
+            "homepage": "https://fmd.ag/",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "laravel/framework": "8.*"
+    },
+    "autoload": {
+        "files": [
+            "src/Http/helpers.php"
+        ],
+        "psr-4": {
+            "Agenciafmd\\Redirects\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Agenciafmd\\Redirects\\Providers\\RedirectServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    }
+}
