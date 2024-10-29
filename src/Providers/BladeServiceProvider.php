@@ -48,7 +48,6 @@ class BladeServiceProvider extends ServiceProvider
         $this->loadJsonTranslationsFrom(__DIR__ . '/../resources/lang');
     }
 
-    // TODO
     protected function publish(): void
     {
         $this->publishes([
