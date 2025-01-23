@@ -13,7 +13,7 @@
 ## Instalação
 
 ```bash
-composer require agenciafmd/admix-redirects:dev-master
+composer require agenciafmd/admix-redirects:v8.x-dev
 ```
 
 Execute a migração
