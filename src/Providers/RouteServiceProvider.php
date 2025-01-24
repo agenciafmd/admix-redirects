@@ -12,11 +12,19 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () {
             Route::prefix(config('admix.url'))
                 ->middleware(['web', 'auth:admix-web'])
-                ->group(__DIR__ . '/../routes/web.php');
-
-            Route::prefix(config('admix.url') . '/api')
-                ->middleware('api')
-                ->group(__DIR__ . '/../routes/api.php');
+                ->group(__DIR__ .  '/../../routes/web.php');
         });
+    }
+
+    public function register(): void
+    {
+        $this->loadBindings();
+
+        parent::register();
+    }
+
+    private function loadBindings(): void
+    {
+        //
     }
 }

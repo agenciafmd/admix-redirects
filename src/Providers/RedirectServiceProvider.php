@@ -14,9 +14,9 @@ class RedirectServiceProvider extends ServiceProvider
 
         $this->setObservers();
 
-        $this->setSearch();
-
         $this->loadMigrations();
+
+        $this->loadTranslations();
 
         $this->publish();
     }
@@ -39,41 +39,35 @@ class RedirectServiceProvider extends ServiceProvider
         Redirect::observe(RedirectObserver::class);
     }
 
-    protected function setSearch(): void
-    {
-        $this->app->make('admix-search')
-            ->registerModel(Redirect::class, 'from');
-    }
-
     protected function loadMigrations(): void
     {
-        $this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+    }
+
+    private function loadTranslations(): void
+    {
+        $this->loadTranslationsFrom(__DIR__ . '/../../lang', 'admix-redirects');
+        $this->loadJsonTranslationsFrom(__DIR__ . '/../../lang');
     }
 
     protected function loadConfigs(): void
     {
-        $this->mergeConfigFrom(__DIR__ . '/../config/admix-redirects.php', 'admix-redirects');
-        $this->mergeConfigFrom(__DIR__ . '/../config/gate.php', 'gate');
-        $this->mergeConfigFrom(__DIR__ . '/../config/audit-alias.php', 'audit-alias');
-        $this->mergeConfigFrom(__DIR__ . '/../config/upload-configs.php', 'upload-configs');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/admix-redirects.php', 'admix-redirects');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/audit-alias.php', 'audit-alias');
     }
 
     protected function publish(): void
     {
         $this->publishes([
-            __DIR__ . '/../Database/Faker' => base_path('database/faker'),
-            __DIR__ . '/../config/upload-configs.php' => base_path('config/upload-configs.php'),
-        ], 'admix-redirects:minimal');
+            __DIR__ . '/../../config' => base_path('config'),
+        ], 'admix-redirects:config');
 
         $this->publishes([
-            __DIR__ . '/../config/admix-redirects.php' => base_path('config/admix-redirects.php'),
-            __DIR__ . '/../config/upload-configs.php' => base_path('config/upload-configs.php'),
-        ], 'admix-redirects:configs');
-
-        $this->publishes([
-            __DIR__ . '/../Database/Factories/RedirectFactory.php' => base_path('database/factories/RedirectFactory.php'),
-            __DIR__ . '/../Database/Faker' => base_path('database/faker'),
-            __DIR__ . '/../Database/Seeders/RedirectsTableSeeder.php' => base_path('database/seeders/RedirectsTableSeeder.php'),
+            __DIR__ . '/../../database/seeders/RedirectTableSeeder.php' => base_path('database/seeders/RedirectTableSeeder.php'),
         ], 'admix-redirects:seeders');
+
+        $this->publishes([
+            __DIR__ . '/../../lang/pt_BR' => lang_path('pt_BR'),
+        ], ['admix-redirects:translations', 'admix-translations']);
     }
 }

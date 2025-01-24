@@ -1,9 +1,11 @@
 <?php
 
+use Agenciafmd\Redirects\Policies\RedirectPolicy;
+
 return [
     [
         'name' => config('admix-redirects.name'),
-        'policy' => '\Agenciafmd\Redirects\Policies\RedirectPolicy',
+        'policy' => RedirectPolicy::class,
         'abilities' => [
             [
                 'name' => 'visualizar',

@@ -12,8 +12,7 @@ class CreateRedirectsTable extends Migration
             $table->increments('id');
             $table->boolean('is_active')
                 ->default(1);
-            $table->boolean('star')
-                ->default(0);
+            $table->string('name');
             $table->string('from');
             $table->string('to');
             $table->string('type');

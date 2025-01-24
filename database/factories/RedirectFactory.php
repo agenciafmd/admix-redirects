@@ -15,12 +15,10 @@ class RedirectFactory extends Factory
         return [
             'is_active' => $this->faker->optional(0.2, 1)
                 ->randomElement([0]),
-            'star' => $this->faker->optional(0.2, 1)
-                ->randomElement([0]),
+            'name' => $this->faker->word(),
             'from' => '/' . $this->faker->word(),
             'to' => $this->faker->url,
-            'type' => $this->faker->randomElement(collect(config('admix-redirects.options.types'))->keys()),
-            'sort' => null,
+            'type' => $this->faker->randomElement(collect(config('admix-redirects.types'))->keys()),
         ];
     }
 }

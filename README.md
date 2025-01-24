@@ -13,7 +13,7 @@
 ## Instalação
 
 ```bash
-composer require agenciafmd/admix-redirects:dev-master
+composer require agenciafmd/admix-redirects:v11.x-dev
 ```
 
 Execute a migração
@@ -71,7 +71,7 @@ Route::fallback(static fn() => abort(404));
 Caso seja necessário alguma modificação, publique o arquivo de config. com o comando:
 
 ```bash
-php artisan vendor:publish --tag=admix-redirects:configs
+php artisan vendor:publish --tag=admix-redirects:config
 ```
 
 Ex.
@@ -79,12 +79,11 @@ Ex.
 <?php
 
 return [
-    'name' => 'Redirecionamentos',
-    'icon' => 'icon fe-trending-up',
-    'sort' => 90,
-    'default_sort' => [
-        '-is_active',
-        'sort',
+    'name' => 'Redirects',
+    'icon' => 'arrow-guide',
+    'sort' => 100,
+    'sources' => [
+        //
     ],
     'options' => [
         'types' => [

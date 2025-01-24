@@ -12,14 +12,13 @@
         }
     ],
     "require": {
-        "laravel/framework": "8.*"
+        "laravel/framework": "11.*"
     },
     "autoload": {
-        "files": [
-            "src/Http/helpers.php"
-        ],
         "psr-4": {
-            "Agenciafmd\\Redirects\\": "src/"
+            "Agenciafmd\\Redirects\\": "src/",
+            "Agenciafmd\\Redirects\\Database\\Factories\\": "database/factories/",
+            "Agenciafmd\\Redirects\\Database\\Seeders\\": "database/seeders/"
         }
     },
     "extra": {
