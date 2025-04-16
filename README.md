@@ -36,7 +36,7 @@ php artisan vendor:publish --tag=admix-postal:seeders
 
 ## Uso
 
-Adicione o middleware ao grupo `web` no `$middlewareGroups` em `app/Http/Kernel.php`:
+Adicione o middleware ao grupo `web` no `$middlewareGroups` em `app/Http/Kernel.php` ANTES de `\Illuminate\Routing\Middleware\SubstituteBindings::class`:
 
 ```php
 <?php
