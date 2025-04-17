@@ -50,7 +50,9 @@ protected $middlewareGroups = [
 ```
 
 Adicione o `fallback` ao fim das suas rotas web:
-
+`
+Route::fallback(static fn() => abort(404));
+`
 Ex.
 ```php
 <?php
