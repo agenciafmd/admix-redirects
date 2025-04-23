@@ -4,6 +4,8 @@ namespace Agenciafmd\Redirects\Http\Components\Aside;
 
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use Illuminate\Support\Facades\Gate;
+use Agenciafmd\Redirects\Models\Redirect as RedirectModel;
 
 class Redirect extends Component
 {
@@ -21,7 +23,7 @@ class Redirect extends Component
         $this->label = __(config('admix-redirects.name'));
         $this->url = route('admix.redirects.index');
         $this->active = request()?->currentRouteNameStartsWith('admix.redirects');
-        $this->visible = true;
+        $this->visible = Gate::allows('view', RedirectModel::class);
 
         return view('admix::components.aside.item');
     }
