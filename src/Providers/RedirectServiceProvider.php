@@ -2,8 +2,6 @@
 
 namespace Agenciafmd\Redirects\Providers;
 
-use Agenciafmd\Redirects\Models\Redirect;
-use Agenciafmd\Redirects\Observers\RedirectObserver;
 use Illuminate\Support\ServiceProvider;
 
 class RedirectServiceProvider extends ServiceProvider

@@ -2,10 +2,10 @@
 
 namespace Agenciafmd\Redirects\Http\Components\Aside;
 
-use Illuminate\Contracts\View\View;
-use Illuminate\View\Component;
-use Illuminate\Support\Facades\Gate;
 use Agenciafmd\Redirects\Models\Redirect as RedirectModel;
+use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Gate;
+use Illuminate\View\Component;
 
 class Redirect extends Component
 {

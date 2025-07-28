@@ -3,8 +3,6 @@
 namespace Agenciafmd\Redirects\Models;
 
 use Agenciafmd\Admix\Traits\WithScopes;
-use Agenciafmd\Admix\Traits\WithSlug;
-use Agenciafmd\Faqs\Observers\FaqObserver;
 use Agenciafmd\Redirects\Database\Factories\RedirectFactory;
 use Agenciafmd\Redirects\Observers\RedirectObserver;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
