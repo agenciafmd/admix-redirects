@@ -5,27 +5,38 @@
             <x-form.label for="form.is_active">
                 {{ str(__('admix-redirects::fields.is_active'))->ucfirst() }}
             </x-form.label>
-            <x-form.toggle name="form.is_active"
-                           :large="true"
-                           :label-on="__('Yes')"
-                           :label-off="__('No')"
+            <x-form.toggle
+                    name="form.is_active"
+                    :large="true"
+                    :label-on="__('Yes')"
+                    :label-off="__('No')"
             />
         </div>
         <div class="col-md-6 mb-3">
         </div>
         <div class="col-md-6 mb-3">
-            <x-form.select name="form.type"
-                           :label="__('admix-redirects::fields.type')"
-                           :options="config('admix-redirects.types')"/>
+            <x-form.select
+                    name="form.type"
+                    :label="__('admix-redirects::fields.type')"
+                    :options="config('admix-redirects.types')"
+            />
         </div>
         <div class="col-md-6 mb-3">
-            <x-form.input name="form.name" :label="__('admix-redirects::fields.name')"/>
+            <!-- -->
         </div>
         <div class="col-md-6 mb-3">
-            <x-form.input name="form.from" :label="__('admix-redirects::fields.from')"/>
+            <x-form.input
+                    name="form.from"
+                    :label="__('admix-redirects::fields.from')"
+                    placeholder="/contato"
+            />
         </div>
         <div class="col-md-6 mb-3">
-            <x-form.input name="form.to" :label="__('admix-redirects::fields.to')"/>
+            <x-form.input
+                    name="form.to"
+                    :label="__('admix-redirects::fields.to')"
+                    placeholder="https://fmd.ag"
+            />
         </div>
     </div>
 

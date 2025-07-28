@@ -14,7 +14,7 @@ class Form extends LivewireForm
     public bool $is_active = true;
 
     #[Validate]
-    public string $name = '';
+    public string $type = '';
 
     #[Validate]
     public string $from = '';
@@ -22,15 +22,11 @@ class Form extends LivewireForm
     #[Validate]
     public string $to = '';
 
-    #[Validate]
-    public string $type = '';
-
     public function setModel(Redirect $redirect): void
     {
         $this->redirect = $redirect;
         if ($redirect->exists) {
             $this->is_active = $redirect->is_active;
-            $this->name = $redirect->name;
             $this->type = $redirect->type;
             $this->from = $redirect->from;
             $this->to = $redirect->to;
@@ -43,17 +39,19 @@ class Form extends LivewireForm
             'is_active' => [
                 'boolean',
             ],
-            'name' => [
-                'required',
-            ],
             'type' => [
                 'required',
             ],
             'from' => [
                 'required',
+                'starts_with:/',
+                'max:255',
             ],
             'to' => [
                 'required',
+                'url',
+                'max:255',
+                'different:from',
             ],
         ];
     }
@@ -62,7 +60,6 @@ class Form extends LivewireForm
     {
         return [
             'is_active' => __('admix-redirects::fields.is_active'),
-            'name' => __('admix-redirects::fields.name'),
             'type' => __('admix-redirects::fields.type'),
             'from' => __('admix-redirects::fields.from'),
             'to' => __('admix-redirects::fields.to'),

@@ -2,7 +2,6 @@
 
 return [
     'is_active' => 'ativo',
-    'name' => 'nome',
     'type' => 'tipo',
     'from' => 'de',
     'to' => 'para',

@@ -12,18 +12,18 @@ class RouteServiceProvider extends ServiceProvider
         $this->routes(function () {
             Route::prefix(config('admix.url'))
                 ->middleware(['web', 'auth:admix-web'])
-                ->group(__DIR__ .  '/../../routes/web.php');
+                ->group(__DIR__ . '/../../routes/web.php');
         });
     }
 
     public function register(): void
     {
-        $this->loadBindings();
+        $this->registerBindings();
 
         parent::register();
     }
 
-    private function loadBindings(): void
+    private function registerBindings(): void
     {
         //
     }

@@ -18,13 +18,17 @@ class UseRedirectPackage
         $redirects = Cache::rememberForever('use-redirect-package', static function () {
             return Collection::make(Redirect::query()
                 ->isActive()
-                ->select(['from', 'to', 'type'])
+                ->select([
+                    'from',
+                    'to',
+                    'type',
+                ])
                 ->get()
                 ->map(static function ($item) {
                     $item['from'] = config('app.url') . '/' . Str::of($item->from)
-                            ->trim('/')
-                            ->trim()
-                            ->__toString();
+                        ->trim('/')
+                        ->trim()
+                        ->__toString();
 
                     return $item;
                 })

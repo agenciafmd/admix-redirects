@@ -12,11 +12,9 @@ class CreateRedirectsTable extends Migration
             $table->increments('id');
             $table->boolean('is_active')
                 ->default(1);
-            $table->string('name');
+            $table->string('type');
             $table->string('from');
             $table->string('to');
-            $table->string('type');
-            $table->string('slug');
             $table->integer('sort')
                 ->nullable();
             $table->timestamps();

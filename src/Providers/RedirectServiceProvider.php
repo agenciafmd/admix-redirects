@@ -10,23 +10,21 @@ class RedirectServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        $this->providers();
+        $this->bootProviders();
 
-        $this->setObservers();
+        $this->bootMigrations();
 
-        $this->loadMigrations();
+        $this->bootTranslations();
 
-        $this->loadTranslations();
-
-        $this->publish();
+        $this->bootPublish();
     }
 
     public function register(): void
     {
-        $this->loadConfigs();
+        $this->registerConfigs();
     }
 
-    protected function providers(): void
+    private function bootProviders(): void
     {
         $this->app->register(AuthServiceProvider::class);
         $this->app->register(BladeServiceProvider::class);
@@ -34,29 +32,7 @@ class RedirectServiceProvider extends ServiceProvider
         $this->app->register(RouteServiceProvider::class);
     }
 
-    protected function setObservers(): void
-    {
-        Redirect::observe(RedirectObserver::class);
-    }
-
-    protected function loadMigrations(): void
-    {
-        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
-    }
-
-    private function loadTranslations(): void
-    {
-        $this->loadTranslationsFrom(__DIR__ . '/../../lang', 'admix-redirects');
-        $this->loadJsonTranslationsFrom(__DIR__ . '/../../lang');
-    }
-
-    protected function loadConfigs(): void
-    {
-        $this->mergeConfigFrom(__DIR__ . '/../../config/admix-redirects.php', 'admix-redirects');
-        $this->mergeConfigFrom(__DIR__ . '/../../config/audit-alias.php', 'audit-alias');
-    }
-
-    protected function publish(): void
+    private function bootPublish(): void
     {
         $this->publishes([
             __DIR__ . '/../../config' => base_path('config'),
@@ -69,5 +45,22 @@ class RedirectServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__ . '/../../lang/pt_BR' => lang_path('pt_BR'),
         ], ['admix-redirects:translations', 'admix-translations']);
+    }
+
+    private function bootMigrations(): void
+    {
+        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
+    }
+
+    private function bootTranslations(): void
+    {
+        $this->loadTranslationsFrom(__DIR__ . '/../../lang', 'admix-redirects');
+        $this->loadJsonTranslationsFrom(__DIR__ . '/../../lang');
+    }
+
+    private function registerConfigs(): void
+    {
+        $this->mergeConfigFrom(__DIR__ . '/../../config/admix-redirects.php', 'admix-redirects');
+        $this->mergeConfigFrom(__DIR__ . '/../../config/audit-alias.php', 'audit-alias');
     }
 }
