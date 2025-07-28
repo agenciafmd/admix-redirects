@@ -25,7 +25,7 @@ php artisan migrate
 Se precisar do seed, faça a publicação
 
 ```bash
-php artisan vendor:publish --tag=admix-postal:seeders
+php artisan vendor:publish --tag=admix-redirects:seeders
 ```
 
 **Não esqueça**
@@ -36,17 +36,26 @@ php artisan vendor:publish --tag=admix-postal:seeders
 
 ## Uso
 
-Adicione o middleware ao grupo `web` no `$middlewareGroups` em `app/Http/Kernel.php`:
+Adicione o middleware `UseRedirectPackage` em `bootstrap/app.php`.
 
 ```php
 <?php
 
-protected $middlewareGroups = [
-    'web' => [
-        ...
-        \Agenciafmd\Redirects\Http\Middleware\UseRedirectPackage::class,
-    ],
-];
+use Agenciafmd\Redirects\Http\Middleware\UseRedirectPackage;
+
+return Application::configure(basePath: dirname(__DIR__))
+    ->withRouting(
+        web: __DIR__ . '/../routes/web.php',
+        commands: __DIR__ . '/../routes/console.php',
+        health: '/up',
+    )
+    ->withMiddleware(function (Middleware $middleware) {
+        // Adicione o middleware UseRedirectPackage
+        $middleware->append(UseRedirectPackage::class);
+    })
+    ->withExceptions(function (Exceptions $exceptions) {
+        //
+    })->create();
 ```
 
 Adicione o `fallback` ao fim das suas rotas web:
@@ -68,7 +77,7 @@ Route::fallback(static fn() => abort(404));
 
 ## Configurações
 
-Caso seja necessário alguma modificação, publique o arquivo de config. com o comando:
+Caso seja necessária alguma modificação, publique o arquivo de config com o comando:
 
 ```bash
 php artisan vendor:publish --tag=admix-redirects:config
@@ -82,13 +91,18 @@ return [
     'name' => 'Redirects',
     'icon' => 'arrow-guide',
     'sort' => 100,
-    'sources' => [
-        //
-    ],
-    'options' => [
-        'types' => [
-            '301' => 'Permanente (301)',
-            '302' => 'Temporário (302)',
+    'types' => [
+        [
+            'value' => '',
+            'label' => '-',
+        ],
+        [
+            'value' => '301',
+            'label' => 'Permanente (301)',
+        ],
+        [
+            'value' => '302',
+            'label' => 'Temporário (302)',
         ],
     ],
 ];

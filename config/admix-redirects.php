@@ -17,6 +17,5 @@ return [
             'value' => '302',
             'label' => 'Temporário (302)',
         ],
-
     ],
 ];
